@@ -28,7 +28,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().and()
             .authorizeRequests()
                 .antMatchers("/login","/registration", "/", "/index",
-                                        "/resources/**").permitAll()
+                                        "/css/**", "/js/**").permitAll()
                 .antMatchers("/medcin").hasRole("Medcin")
                 .antMatchers("/patient").hasAnyRole("Patient","Medcin")
                 .antMatchers("/secretaire").hasAnyRole("Secretaire","Medcin")
