@@ -25,18 +25,23 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-            .and()
-            .authorizeRequests().antMatchers("/login","/registration", "/", "/index").permitAll()
-                                .antMatchers("/medcin").hasRole("Medcin")
-                                .antMatchers("/patient").hasAnyRole("Patient","Medcin")
-                                .antMatchers("/secretaire").hasAnyRole("Secretaire","Medcin")
-            .anyRequest().authenticated()
-            .and()
-            .formLogin().loginPage("/login").permitAll()
-            .and()
-            .logout().invalidateHttpSession(true)
-                     .clearAuthentication(true);
-
+        http.csrf().and()
+            .authorizeRequests()
+                .antMatchers("/login","/registration", "/", "/index",
+                                        "/resources/**").permitAll()
+                .antMatchers("/medcin").hasRole("Medcin")
+                .antMatchers("/patient").hasAnyRole("Patient","Medcin")
+                .antMatchers("/secretaire").hasAnyRole("Secretaire","Medcin")
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .defaultSuccessUrl("/home")
+                .failureUrl("/login")
+                .and()
+            .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true);
     }
 }

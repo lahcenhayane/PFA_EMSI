@@ -15,6 +15,7 @@ public class UserController {
 
     @GetMapping(value = {"/login"})
     public String showLogin(Model model){
+        model.addAttribute("login", "hello Login");
         return "login";
     }
 
