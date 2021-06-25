@@ -13,8 +13,24 @@ public class UserController {
     @Autowired
     IUserService userService;
 
-    @PostMapping(value = {"/login"})
+    @GetMapping(value = {"/login"})
+    public String showLogin(Model model){
+        return "login";
+    }
+
+    @PostMapping("/login")
     public String login(Model model){
+        return "redirect:index";
+    }
+
+
+    @GetMapping(value = {"/registration"})
+    public String showRegistration(Model model){
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String registration(Model model){
         return "login";
     }
 
