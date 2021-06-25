@@ -27,7 +27,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
             .and()
-            .authorizeRequests().antMatchers("/login","/register").permitAll()
+            .authorizeRequests().antMatchers("/login","/register", "/", "/index").permitAll()
                                 .antMatchers("/medcin").hasRole("Medcin")
                                 .antMatchers("/patient").hasAnyRole("Patient","Medcin")
                                 .antMatchers("/secretaire").hasAnyRole("Secretaire","Medcin")
