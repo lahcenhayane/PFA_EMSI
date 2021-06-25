@@ -1,0 +1,5 @@
+package com.pfa.app.services;
+
+public interface IUserService {
+
+}
