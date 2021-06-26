@@ -1,49 +1,28 @@
-package com.pfa.app.Entities;
+package com.pfa.app.dto;
 
+import com.pfa.app.Entities.UserEntity;
 import com.pfa.app.enums.CouvertureSociale;
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
-import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "patients")
-public class PatientEntity {
-    @Id @GeneratedValue
-    private long id;
-    @Column(nullable = false, unique = true)
+public class PatientDto {
     private String cin;
     private String ville;
     private String profession;
     private String motif;
-    @CreatedDate
-    @Column(nullable = false)
-    private Date create_at;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private CouvertureSociale couvertureSociale;
+    private UserDto userDto;
 
-    @OneToOne
-    @JoinColumn(name = "users_id", nullable = false)
-    private UserEntity user;
-
-    public PatientEntity() {
-        this.create_at = new Date();
+    public PatientDto() {
     }
 
-    public PatientEntity(long id, String cin, String ville, String profession, String motif, CouvertureSociale couvertureSociale, UserEntity user) {
-        this.id = id;
+    public PatientDto(String cin, String ville, String profession, String motif, CouvertureSociale couvertureSociale, UserDto userDto) {
         this.cin = cin;
         this.ville = ville;
         this.profession = profession;
         this.motif = motif;
-        this.create_at = new Date();
         this.couvertureSociale = couvertureSociale;
-        this.user = user;
-    }
-
-    public long getId() {
-        return id;
+        this.userDto = userDto;
     }
 
     public String getCin() {
@@ -78,10 +57,6 @@ public class PatientEntity {
         this.motif = motif;
     }
 
-    public Date getCreate_at() {
-        return create_at;
-    }
-
     public CouvertureSociale getCouvertureSociale() {
         return couvertureSociale;
     }
@@ -90,11 +65,11 @@ public class PatientEntity {
         this.couvertureSociale = couvertureSociale;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public UserDto getUserDto() {
+        return userDto;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 }

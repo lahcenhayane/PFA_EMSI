@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-registration
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-lg-6 col-md-6 col-sm-11 mx-auto">
+                <h1>Enregister Patient</h1>
+                <form method="post" th:action="@{createPatient}" th:object="${user}">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Nom">Nom</label>
+                                <input type="text" th:field="*{nom}" class="form-control" id="Nom">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Prenom">Prenom</label>
+                                <input type="text" th:field="*{prenom}" class="form-control" id="Prenom">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Addresse">Addresse</label>
+                        <input type="text" th:field="*{address}" class="form-control" id="Addresse">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" th:field="*{email}" class="form-control" id="email">
+                        <small id="emailHelp" class="form-text text-muted">Error</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de Passe</label>
+                        <input type="password" th:field="*{password}" class="form-control" id="password">
+                    </div>
+                    <ul class="list-group">
+                        <label>Sexe</label>
+                        <li class="list-group-item">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" th:field="*{sexe}" id="sexeHomme" value="Homme" checked="checked">
+                                <label class="form-check-label" for="sexeHomme">Homme</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" th:field="*{sexe}" id="sexeFemme" value="Femme">
+                                <label class="form-check-label" for="sexeFemme">Femme</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="form-group">
+                        <label for="Telephone">Telephone</label>
+                        <input id="Telephone" th:field="*{tel}" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateNaissance">Date Naissance</label>
+                        <input type="date" th:field="*{dateNaissance}" class="form-control" id="dateNaissance">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

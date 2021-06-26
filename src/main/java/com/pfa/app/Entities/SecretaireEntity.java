@@ -1,39 +1,44 @@
 package com.pfa.app.Entities;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.util.Date;
 
-@Document(collection = "secretaires")
+@Entity(name = "secretaires")
 public class SecretaireEntity {
-
-    private String id;
-    private String salaire;
+    @Id @GeneratedValue
+    private long id;
+    private float salaire;
+    @CreatedDate
+    @Column(nullable = false)
     private Date create_at;
 
+    @OneToOne
+    @JoinColumn(name = "users_id", nullable = false)
     private UserEntity user;
 
     public SecretaireEntity() {
         this.create_at = new Date();
     }
 
-    public SecretaireEntity(String id, String salaire, Date create_at, UserEntity user) {
+    public SecretaireEntity(long id, float salaire, Date create_at, UserEntity user) {
         this.id = id;
         this.salaire = salaire;
         this.create_at = new Date();
         this.user = user;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public String getSalaire() {
+    public float getSalaire() {
         return salaire;
     }
 
-    public void setSalaire(String salaire) {
+    public void setSalaire(float salaire) {
         this.salaire = salaire;
     }
 

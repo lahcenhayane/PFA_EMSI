@@ -3,37 +3,47 @@ package com.pfa.app.Entities;
 
 import com.pfa.app.enums.Roles;
 import com.pfa.app.enums.Sexe;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.annotation.processing.Generated;
+import javax.persistence.*;
 import java.util.Date;
 
-@Document(collection = "users")
+@Entity(name = "users")
 public class UserEntity {
     @Id
-    private String id;
+    @GeneratedValue
+    private long id;
     private String nom;
     private String prenom;
     private String address;
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Sexe sexe;
     private String tel;
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
+    @Enumerated(EnumType.STRING)
     private Roles role;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(nullable = false)
     private Date create_at;
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private PatientEntity patient;
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private SecretaireEntity secretaire;
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private MedcinEntity medcin;
 
     public UserEntity() {
         this.create_at = new Date();
     }
 
-    public UserEntity(String id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, Date create_at, MedcinEntity medcin) {
+    public UserEntity(long id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, MedcinEntity medcin) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -48,7 +58,7 @@ public class UserEntity {
         this.medcin = medcin;
     }
 
-    public UserEntity(String id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, Date create_at, SecretaireEntity secretaire) {
+    public UserEntity(long id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, SecretaireEntity secretaire) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -63,7 +73,7 @@ public class UserEntity {
         this.secretaire = secretaire;
     }
 
-    public UserEntity(String id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, Date create_at, PatientEntity patient) {
+    public UserEntity(long id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, PatientEntity patient) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -78,7 +88,7 @@ public class UserEntity {
         this.patient = patient;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
@@ -156,10 +166,6 @@ public class UserEntity {
 
     public Date getCreate_at() {
         return create_at;
-    }
-
-    public void setCreate_at(Date create_at) {
-        this.create_at = create_at;
     }
 
     public PatientEntity getPatient() {
