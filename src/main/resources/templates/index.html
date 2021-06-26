@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="Layouts/layout">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -8,11 +11,16 @@
 </head>
 <body>
 
-    <a class="btn btn-outline-primary" th:href="@{/medcin}">Medcin</a>
-    <p class="btnColor">Index</p>
-    <a class="btn btn-outline-primary" th:href="@{/login}">Login</a>
-    <a class="btn btn-outline-primary" th:href="@{/registration}">Enregistrer</a>
-    <a class="btn btn-outline-primary" th:href="@{/logout}">Logout</a>
+    <div layout:fragment="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    Hello Hello
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>

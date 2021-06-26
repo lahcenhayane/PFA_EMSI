@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "patients")
 public class PatientEntity {
@@ -23,12 +24,25 @@ public class PatientEntity {
     @Column(nullable = false)
     private CouvertureSociale couvertureSociale;
 
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<RdvEntity> rdvs;
+
     @OneToOne
     @JoinColumn(name = "users_id", nullable = false)
     private UserEntity user;
 
     public PatientEntity() {
         this.create_at = new Date();
+    }
+
+    public PatientEntity(String cin, String ville, String profession, String motif, Date create_at, CouvertureSociale couvertureSociale, List<RdvEntity> rdvs) {
+        this.cin = cin;
+        this.ville = ville;
+        this.profession = profession;
+        this.motif = motif;
+        this.create_at = create_at;
+        this.couvertureSociale = couvertureSociale;
+        this.rdvs = rdvs;
     }
 
     public PatientEntity(long id, String cin, String ville, String profession, String motif, CouvertureSociale couvertureSociale, UserEntity user) {
@@ -96,5 +110,13 @@ public class PatientEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public List<RdvEntity> getRdvs() {
+        return rdvs;
+    }
+
+    public void setRdvs(List<RdvEntity> rdvs) {
+        this.rdvs = rdvs;
     }
 }

@@ -56,4 +56,5 @@ public class UserServiceImpl implements IUserService {
         if (findUserByEmail != null) throw new UsernameNotFoundException(userDto.getEmail());
         userRepository.save(userEntity);
     }
+
 }
