@@ -25,17 +25,8 @@ public class UserController {
 
     @GetMapping(value = {"/login"})
     public String showLogin(Model model){
-        LoginUserDto loginUserDto = new LoginUserDto();
-        model.addAttribute("userLogin", loginUserDto);
         return "login";
     }
-
-    @PostMapping("/login")
-    public String login(LoginUserDto loginUserDto){
-        
-        return "redirect:index";
-    }
-
 
     @GetMapping(value = {"/registration"})
     public String showRegistration(Model model){

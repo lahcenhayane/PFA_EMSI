@@ -43,8 +43,7 @@ public class UserEntity {
         this.create_at = new Date();
     }
 
-    public UserEntity(long id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, MedcinEntity medcin) {
-        this.id = id;
+    public UserEntity(String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, MedcinEntity medcin) {
         this.nom = nom;
         this.prenom = prenom;
         this.address = address;
@@ -58,8 +57,7 @@ public class UserEntity {
         this.medcin = medcin;
     }
 
-    public UserEntity(long id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, SecretaireEntity secretaire) {
-        this.id = id;
+    public UserEntity(String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, SecretaireEntity secretaire) {
         this.nom = nom;
         this.prenom = prenom;
         this.address = address;
@@ -73,8 +71,7 @@ public class UserEntity {
         this.secretaire = secretaire;
     }
 
-    public UserEntity(long id, String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, PatientEntity patient) {
-        this.id = id;
+    public UserEntity(String nom, String prenom, String address, String email, String password, Sexe sexe, String tel, Date dateNaissance, Roles role, PatientEntity patient) {
         this.nom = nom;
         this.prenom = prenom;
         this.address = address;
