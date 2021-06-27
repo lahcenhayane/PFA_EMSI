@@ -34,7 +34,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                                         "/", "/index",
                                         "/css/**", "/js/**").permitAll()
                 .antMatchers("/medcin/**").hasRole(Roles.Medcin.name())
-                .antMatchers("/patient/**").hasAnyRole(Roles.Patient.name(),Roles.Medcin.name())
+                .antMatchers("/patient/**","/rdv/**").hasAnyRole(Roles.Patient.name())
                 .antMatchers("/secretaire/**").hasAnyRole(Roles.Secretaire.name(),Roles.Medcin.name())
                 .anyRequest().authenticated()
                 .and()

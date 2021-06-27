@@ -24,7 +24,7 @@
                             <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item" sec:authorize="isAuthenticated()">
-                            <a class="nav-link" th:href="@{/rdv}">Rendez-vous</a>
+                            <a class="nav-link" th:href="@{/patient/rdv}">Rendez-vous</a>
                         </li>
                         <li class="nav-item" sec:authorize="isAuthenticated()">
                             <a class="nav-link" th:href="@{/patient}">Patients</a>
@@ -60,7 +60,7 @@
     </section>
 
     <footer class="fixed-bottom bg-light">
-        <p class="py-2">Copyright 2021 By HAYANE Lahcen</p>
+        <p class="py-2 text-center">Copyright 2021 By HAYANE Lahcen</p>
     </footer>
 
 

@@ -3,6 +3,7 @@ package com.pfa.app.controllers;
 import com.pfa.app.services.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -10,4 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PatientController {
     @Autowired
     IPatientService patientService;
+
+    @GetMapping
+    public String index(){
+        return "Patient/index";
+    }
+
+    @GetMapping(value = {"/rdv"})
+    public String rdv(){
+        return "Patient/rdv";
+    }
 }

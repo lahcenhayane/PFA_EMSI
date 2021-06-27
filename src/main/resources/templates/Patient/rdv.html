@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="Layouts/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rendez-Vous</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 mx-auto">
+                <div>
+                    <form method="post" th:action="@{/ajout}" th:object="">
+                        <div class="row">
+                            <div class="col">
+                                <label for="cin">CIN</label>
+                                <input type="text" class="form-control" id="cin"placeholder="CIN">
+                            </div>
+                            <div class="col">
+                                <label for="ville">Ville</label>
+                                <input type="text" class="form-control" id="ville" placeholder="Ville">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profession">Profession</label>
+                            <input type="text" class="form-control" id="Profession" placeholder="Profession">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="motif">Motif</label>
+                            <input type="text" class="form-control" id="motif" placeholder="Motif">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="CouvertureSociale">Couverture Sociale</label>
+                            <select class="form-control" id="CouvertureSociale" name="CouvertureSociale">
+                                <option value="Aucune" selected="selected">Aucune</option>
+                                <option value="Assurance">Assurance</option>
+                                <option value="RAMED">RAMED</option>
+                                <option value="CNOPS">CNOPS</option>
+                                <option value="CNSS">CNSS</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
