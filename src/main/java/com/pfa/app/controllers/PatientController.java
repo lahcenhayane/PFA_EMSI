@@ -17,7 +17,7 @@ public class PatientController {
         return "Patient/index";
     }
 
-    @GetMapping(value = {"/rdv"})
+    @GetMapping("/rdv")
     public String rdv(){
         return "Patient/rdv";
     }
