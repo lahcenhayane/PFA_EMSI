@@ -13,7 +13,7 @@
 <div layout:fragment="content">
     <div class="container">
         <div class="row mt-2">
-            <div class="col-lg-6 col-md-6 col-sm-11 mx-auto">
+            <div class="col-lg-8 col-md-8 col-sm-11 mx-auto">
                 <div class="formLogin">
                     <h1 class="line text-center">Enregister Patient</h1>
                     <form class="mb-3" method="post" th:action="@{createPatient}" th:object="${user}">
@@ -66,6 +66,37 @@
                         <div class="form-group">
                             <label for="dateNaissance">Date Naissance</label>
                             <input type="date" th:field="*{dateNaissance}" class="form-control" id="dateNaissance" placeholder="Date Naissance">
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="cin">CIN</label>
+                                <input type="text" th:field="*{patient.cin}" class="form-control" id="cin"placeholder="CIN">
+                            </div>
+                            <div class="col">
+                                <label for="ville">Ville</label>
+                                <input type="text" th:field="*{patient.ville}" class="form-control" id="ville" placeholder="Ville">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profession">Profession</label>
+                            <input type="text" class="form-control" th:field="*{patient.profession}" id="Profession" placeholder="Profession">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="motif">Motif</label>
+                            <input type="text" th:field="*{patient.motif}" class="form-control" id="motif" placeholder="Motif">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="CouvertureSociale">Couverture Sociale</label>
+                            <select class="form-control" id="CouvertureSociale" th:field="*{patient.couvertureSociale}">
+                                <option value="Aucune" selected="selected">Aucune</option>
+                                <option value="Assurance">Assurance</option>
+                                <option value="RAMED">RAMED</option>
+                                <option value="CNOPS">CNOPS</option>
+                                <option value="CNSS">CNSS</option>
+                            </select>
                         </div>
                         <button type="submit" class="w-100 btn btn-primary">Enregistrer</button>
                     </form>

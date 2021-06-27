@@ -1,7 +1,6 @@
 package com.pfa.app.services.impl;
 
 import com.pfa.app.Entities.UserEntity;
-import com.pfa.app.dto.UserDto;
 import com.pfa.app.enums.Roles;
 import com.pfa.app.repositories.UserRepository;
 import com.pfa.app.services.IUserService;
@@ -39,22 +38,23 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void createPatient(UserDto userDto) throws ParseException {
+    public void createPatient(UserEntity user) throws ParseException {
 
-        UserEntity userEntity = new UserEntity();
-        userEntity.setNom(userDto.getNom());
-        userEntity.setPrenom(userDto.getPrenom());
-        userEntity.setAddress(userDto.getAddress());
-        userEntity.setEmail(userDto.getEmail());
-        userEntity.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        userEntity.setSexe(userDto.getSexe());
-        userEntity.setTel(userDto.getTel());
-        userEntity.setDateNaissance(userDto.getDateNaissance());
-        userEntity.setRole(Roles.Patient);
+        UserEntity findUserByEmail = userRepository.findByEmail(user.getEmail());
+        if (findUserByEmail != null) throw new RuntimeException("User Already Exist "+user.getEmail());
 
-        UserEntity findUserByEmail = userRepository.findByEmail(userDto.getEmail());
-        if (findUserByEmail != null) throw new UsernameNotFoundException(userDto.getEmail());
-        userRepository.save(userEntity);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRole(Roles.Patient);
+        user.getPatient().setUser(user);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public String findPatient(String email) {
+        UserEntity user = userRepository.findByEmail(email);
+        if (user == null) throw new UsernameNotFoundException("User Not Found "+email);
+        return user.getPatient().getCin();
     }
 
 }

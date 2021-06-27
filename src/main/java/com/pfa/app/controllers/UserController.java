@@ -1,7 +1,6 @@
 package com.pfa.app.controllers;
 
-import com.pfa.app.dto.LoginUserDto;
-import com.pfa.app.dto.UserDto;
+import com.pfa.app.Entities.UserEntity;
 import com.pfa.app.enums.Roles;
 import com.pfa.app.enums.Sexe;
 import com.pfa.app.services.IUserService;
@@ -38,14 +37,14 @@ public class UserController {
 
     @GetMapping(value = {"/registration"})
     public String showRegistration(Model model){
-        UserDto userDto = new UserDto();
-        model.addAttribute("user", userDto);
+        UserEntity userEntity = new UserEntity();
+        model.addAttribute("user", userEntity);
         return "registration";
     }
 
     @PostMapping("/createPatient")
-    public String registration(UserDto userDto) throws ParseException {
-        userService.createPatient(userDto);
+    public String registration(UserEntity userEntity) throws ParseException {
+        userService.createPatient(userEntity);
         return "redirect:/login";
     }
 

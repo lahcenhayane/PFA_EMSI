@@ -10,4 +10,9 @@ public class PatientServiceImpl implements IPatientService {
 
     @Autowired
     PatientRepository patientRepository;
+
+    @Override
+    public void findPatient(String email) {
+
+    }
 }
