@@ -14,34 +14,55 @@
 <div layout:fragment="content">
     <div class="container my-4">
         <div class="row">
-            <div class="col-md-12 my-4 text-right">
-                <a class="btn btn-primary" th:href="@{/patient/rdv}">Rendez-vous</a>
+            <div class="formLogin col-md-11 mx-auto mb-2">
+                <form method="post" th:action="@{patient/rdvnow}" th:object="${rdv}">
+                    <div class="form-group">
+                        <label for="dateNaissance">Rendez-vous</label>
+                        <input type="date" th:field="*{date}" class="form-control" id="dateNaissance">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Rendez-vous</button>
+                </form>
             </div>
+<!--            <div class="col-md-12 my-4 text-right">-->
+<!--                <a class="btn btn-primary" th:href="@{/patient/rdv}">Rendez-vous</a>-->
+<!--            </div>-->
             <div class="col-md-12">
                 <table class="table">
                     <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Statu</th>
-                        <th scope="col">Retard</th>
-                        <th scope="col">Terminer</th>
-                        <th scope="col">Action</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Statu</th>
+                            <th scope="col">Retard</th>
+                            <th scope="col">Terminer</th>
+                            <th scope="col">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <a href="#">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
+                        <tr th:each="listRdv : ${listRdv} ">
+                            <th scope="row" th:text="${listRdv.getId()}"></th>
+                            <td th:text="${listRdv.getDate()}"></td>
+                            <td th:text="${listRdv.getStatus()}"></td>
+                            <div th:if="${listRdv.getRetard()}">
+                                <td>Yes</td>
+                            </div>
+                            <div th:if="${!listRdv.getRetard()}">
+                                <td>No</td>
+                            </div>
+
+                            <div th:if="${listRdv.getCancel()}">
+                                <td>Yes</td>
+                            </div>
+                            <div th:if="${!listRdv.getCancel()}">
+                                <td>No</td>
+                            </div>
                             <td>
-                                <a class="btn btn-info btn-sm" href="#">Détails</a>
+                                <a class="btn btn-info btn-sm mr-1" th:href="@{'patient/rdv/'+${listRdv.getId()}+'/show'}">Détails</a>
+<!--                                <form class="input-group" method="post" th:action="@{'patient/rdv/'+${listRdv.getId()}+'/terminer'}">-->
+<!--                                    <button class="btn btn-danger btn-sm" type="submit">Terminer/Bloquer</button>-->
+<!--                                </form>-->
                             </td>
                         </tr>
-                    </a>
                     </tbody>
                 </table>
 

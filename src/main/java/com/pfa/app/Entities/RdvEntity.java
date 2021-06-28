@@ -10,6 +10,8 @@ import java.util.Date;
 public class RdvEntity {
     @Id @GeneratedValue
     private long id;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private Date date;
     @Enumerated(EnumType.STRING)
     private RendezVous status;
     private Boolean cancel = false;
@@ -17,14 +19,19 @@ public class RdvEntity {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date create_at = new Date();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patients_id", nullable = false)
     private PatientEntity patient;
+
+    @OneToOne(mappedBy = "rdv", cascade = CascadeType.ALL)
+    private CompteRenduEntity compteRendu;
 
     public RdvEntity() {
     }
 
-    public RdvEntity(RendezVous status, Boolean cancel, PatientEntity patient,Boolean retard) {
+    public RdvEntity(CompteRenduEntity compteRendu, Date date, RendezVous status, Boolean cancel, PatientEntity patient,Boolean retard) {
+        this.compteRendu = compteRendu;
+        this.date = date;
         this.retard = retard;
         this.status = status;
         this.cancel = cancel;
@@ -33,6 +40,14 @@ public class RdvEntity {
 
     public long getId() {
         return id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public RendezVous getStatus() {
@@ -69,5 +84,13 @@ public class RdvEntity {
 
     public void setRetard(Boolean retard) {
         this.retard = retard;
+    }
+
+    public CompteRenduEntity getCompteRendu() {
+        return compteRendu;
+    }
+
+    public void setCompteRendu(CompteRenduEntity compteRendu) {
+        this.compteRendu = compteRendu;
     }
 }

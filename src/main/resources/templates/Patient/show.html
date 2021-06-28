@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="Layouts/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-5">
+        <div class="row mt-5">
+            <div class="col-md-9 mx-auto">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td th:text="${rdv.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td th:text="${rdv.getDate()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Statu</th>
+                            <td th:text="${rdv.getStatus()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Retard</th>
+                            <div th:if="${rdv.getRetard()}">
+                                <td>Yes</td>
+                            </div>
+                            <div th:if="${!rdv.getRetard()}">
+                                <td>No</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <th>Terminer</th>
+                            <div th:if="${rdv.getCancel()}">
+                                <td>Yes</td>
+                            </div>
+                            <div th:if="${!rdv.getCancel()}">
+                                <td>No</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <th><a class="btn btn-sm btn-secondary" th:href="@{/patient}">Retour</a></th>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

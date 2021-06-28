@@ -51,10 +51,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public String findPatient(String email) {
+    public long findPatient(String email) {
         UserEntity user = userRepository.findByEmail(email);
         if (user == null) throw new UsernameNotFoundException("User Not Found "+email);
-        return user.getPatient().getCin();
+        return user.getPatient().getId();
     }
 
 }

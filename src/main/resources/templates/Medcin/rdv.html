@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Layouts/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Render-Vous</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Statu</th>
+                        <th scope="col">Retard</th>
+                        <th scope="col">Terminer</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="row : ${rdvEntities}">
+                        <th scope="row" th:text="${row.getId()}"></th>
+                        <td th:text="${row.getDate()}"></td>
+
+                        <td th:text="${row.getStatus()}"></td>
+                        <div th:if="${row.getRetard()}">
+                            <td>Yes</td>
+                        </div>
+                        <div th:if="${!row.getRetard()}">
+                            <td>No</td>
+                        </div>
+
+                        <div th:if="${row.getCancel()}">
+                            <td>Yes</td>
+                        </div>
+                        <div th:if="${!row.getCancel()}">
+                            <td>No</td>
+                        </div>
+                        <td>
+                            <a class="btn btn-info btn-sm" th:href="@{'medcin/'+${row.getId()}+'/showcompterendu'}">Compte Rendu</a>
+                            <form class="input-group" method="post" th:action="${row.getId()+'/deleterdv'}">
+                                <div th:if="${row.getStatus().name() != 'Valide'}">
+                                    <a class="btn btn-success btn-sm mr-1" th:href="@{${row.getId()}+'/setstatus?status=Valide'}">Valider</a>
+                                    <a class="btn btn-info btn-sm mr-1" th:href="@{${row.getId()}+'/setstatus?status=Attente'}">En Attente</a>
+                                    <a class="btn btn-secondary btn-sm mr-1" th:href="@{${row.getId()}+'/setstatus?status=Annule'}">Annule</a>
+                                    <a class="btn btn-danger btn-sm mr-1" th:href="@{${row.getId()}+'/setstatus?status=Reporte'}">Reporte</a>
+                                </div>
+                                <a class="btn btn-info btn-sm mr-1" th:href="@{${row.getId()}+'/show'}">Détails</a>
+                                <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

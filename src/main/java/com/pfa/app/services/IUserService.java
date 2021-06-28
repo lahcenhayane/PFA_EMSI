@@ -10,5 +10,5 @@ public interface IUserService extends UserDetailsService {
 
     void createPatient(UserEntity userEntity) throws ParseException;
 
-    String findPatient(String email);
+    long findPatient(String email);
 }

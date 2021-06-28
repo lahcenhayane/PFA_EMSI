@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="Layouts/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-5">
+        <div class="row mt-5">
+            <div class="col-md-9 mx-auto">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td th:text="${patient.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>CIN</th>
+                            <td th:text="${patient.getCin()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Nom Prenom</th>
+                            <td th:text="${patient.getUser().getNom()}+' '+${patient.getUser().getPrenom()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td th:text="${patient.getUser().getAddress()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td th:text="${patient.getUser().getEmail()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Ville</th>
+                            <td th:text="${patient.getVille()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Couverture Sociale</th>
+                            <td th:text="${patient.getCouvertureSociale()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Profession</th>
+                            <td th:text="${patient.getProfession()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Date Naissance</th>
+                            <td th:text="${patient.getUser().getDateNaissance()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Motif</th>
+                            <td th:text="${patient.getMotif()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Statu</th>
+                        <th scope="col">Retard</th>
+                        <th scope="col">Terminer</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="row : ${patient.getRdvs()}">
+                        <th scope="row" th:text="${row.getId()}"></th>
+                        <td th:text="${row.getDate()}"></td>
+
+                        <td th:text="${row.getStatus()}"></td>
+                        <div th:if="${row.getRetard()}">
+                            <td>Yes</td>
+                        </div>
+                        <div th:if="${!row.getRetard()}">
+                            <td>No</td>
+                        </div>
+
+                        <div th:if="${row.getCancel()}">
+                            <td>Yes</td>
+                        </div>
+                        <div th:if="${!row.getCancel()}">
+                            <td>No</td>
+                        </div>
+                        <td th:if="${row.getStatus() == 'Valide'}">
+                            <a class="btn btn-info btn-sm" th:href="@{'medcin/'+${row.getId()}+'/show/compterendu'}">Details</a>
+                        </td>
+                        <td th:if="${row.getStatus() != 'Valide'}">
+                            N'est pas encore Valide
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
