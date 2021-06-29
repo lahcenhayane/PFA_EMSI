@@ -31,21 +31,24 @@
 
                         <td th:text="${row.getStatus()}"></td>
                         <div th:if="${row.getRetard()}">
-                            <td>Yes</td>
+                            <td>Oui</td>
                         </div>
                         <div th:if="${!row.getRetard()}">
-                            <td>No</td>
+                            <td>Non</td>
                         </div>
 
                         <div th:if="${row.getCancel()}">
-                            <td>Yes</td>
+                            <td>Oui</td>
                         </div>
                         <div th:if="${!row.getCancel()}">
-                            <td>No</td>
+                            <td>Non</td>
                         </div>
                         <td>
-                            <a class="btn btn-info btn-sm" th:href="@{'medcin/'+${row.getId()}+'/showcompterendu'}">Compte Rendu</a>
+
                             <form class="input-group" method="post" th:action="${row.getId()+'/deleterdv'}">
+                                <div th:if="${row.getCompteRendu() == null}">
+                                    <a class="btn btn-info btn-sm" th:if="${row.getStatus().name() == 'Valide' }" th:href="@{${row.getId()}+'/showcompterendu'}">Compte Rendu</a>
+                                </div>
                                 <div th:if="${row.getStatus().name() != 'Valide'}">
                                     <a class="btn btn-success btn-sm mr-1" th:href="@{${row.getId()}+'/setstatus?status=Valide'}">Valider</a>
                                     <a class="btn btn-info btn-sm mr-1" th:href="@{${row.getId()}+'/setstatus?status=Attente'}">En Attente</a>

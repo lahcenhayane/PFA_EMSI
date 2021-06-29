@@ -39,8 +39,6 @@ public class MedcinController {
         return "Medcin/rdv";
     }
 
-
-
     @GetMapping("/{id}/show")
     public String show(Model model, @PathVariable long id){
         PatientEntity patientEntity = medcinService.getMedcin(id);
@@ -56,15 +54,25 @@ public class MedcinController {
     }
 
     @GetMapping("/{id}/showcompterendu")
-    public String createCompteRendu(){
+    public String compteRenduHome(Model model, @PathVariable long id){
+        CompteRenduEntity compteRendu = new CompteRenduEntity();
+        model.addAttribute("compteRendu", compteRendu);
 
+        RdvEntity rdvEntity = medcinService.getRdv(id);
+        model.addAttribute("rdv", rdvEntity);
         return "Medcin/showCompteRendu";
+    }
+
+    @PostMapping("/{id}/createcr")
+    public String createCompteRendu(@PathVariable long id, CompteRenduEntity compteRendu){
+        medcinService.createCompteRendu(id, compteRendu);
+        return "redirect:/medcin/rdv";
     }
 
     @PostMapping("/{id}/delete")
     public String deletePatient(@PathVariable long id){
         medcinService.deletePatient(id);
-        return "redirect:/";
+        return "redirect:/medcin";
     }
 
     @PostMapping("{id}/deleterdv")

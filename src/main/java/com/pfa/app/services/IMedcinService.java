@@ -19,4 +19,8 @@ public interface IMedcinService {
     List<RdvEntity> getAllRdv();
 
     void setStatusRdv(long id, String rendezVous);
+
+    RdvEntity getRdv(long id);
+
+    void createCompteRendu(long id, CompteRenduEntity compteRendu);
 }

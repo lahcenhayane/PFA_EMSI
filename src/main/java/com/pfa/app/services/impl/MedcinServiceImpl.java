@@ -67,5 +67,21 @@ public class MedcinServiceImpl implements IMedcinService {
         rdvRepository.save(rdvEntity);
     }
 
+    @Override
+    public RdvEntity getRdv(long id) {
+        RdvEntity rdvEntity = rdvRepository.findById(id).get();
+        return rdvEntity;
+    }
+
+    @Override
+    public void createCompteRendu(long id, CompteRenduEntity compteRendu) {
+        RdvEntity rdvEntity = rdvRepository.findById(id).get();
+
+        compteRendu.setRdv(rdvEntity);
+        compteRenduRepository.save(compteRendu);
+
+        rdvEntity.setCancel(true);
+        rdvRepository.save(rdvEntity);
+    }
 
 }

@@ -47,6 +47,10 @@
                             </div>
                         </tr>
                         <tr>
+                            <th>Compte Rendu</th>
+                            <td th:text="${rdv.getCompteRendu().getDescription()}"></td>
+                        </tr>
+                        <tr>
                             <th><a class="btn btn-sm btn-secondary" th:href="@{/patient}">Retour</a></th>
                             <td></td>
                         </tr>

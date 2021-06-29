@@ -67,7 +67,6 @@
                         <th scope="col">Statu</th>
                         <th scope="col">Retard</th>
                         <th scope="col">Terminer</th>
-                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,24 +76,18 @@
 
                         <td th:text="${row.getStatus()}"></td>
                         <div th:if="${row.getRetard()}">
-                            <td>Yes</td>
+                            <td>Oui</td>
                         </div>
                         <div th:if="${!row.getRetard()}">
-                            <td>No</td>
+                            <td>Non</td>
                         </div>
 
                         <div th:if="${row.getCancel()}">
-                            <td>Yes</td>
+                            <td>Oui</td>
                         </div>
                         <div th:if="${!row.getCancel()}">
-                            <td>No</td>
+                            <td>Non</td>
                         </div>
-                        <td th:if="${row.getStatus() == 'Valide'}">
-                            <a class="btn btn-info btn-sm" th:href="@{'medcin/'+${row.getId()}+'/show/compterendu'}">Details</a>
-                        </td>
-                        <td th:if="${row.getStatus() != 'Valide'}">
-                            N'est pas encore Valide
-                        </td>
                     </tr>
                     </tbody>
                 </table>

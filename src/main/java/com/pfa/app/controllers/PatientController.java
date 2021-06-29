@@ -28,7 +28,6 @@ public class PatientController {
     @Autowired
     IUserService userService;
 
-
     @Autowired
     IPatientService patientService;
 

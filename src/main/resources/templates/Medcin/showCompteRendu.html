@@ -15,10 +15,56 @@
         <div class="row mt-5">
             <div class="col-md-9 mx-auto">
                 <div class="formLogin col-md-11 mx-auto mb-2">
-                    <form>
+
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>RDV ID</th>
+                            <td th:text="${rdv.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>CIN</th>
+                            <td th:text="${rdv.getPatient().getCin()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Nom Prenom</th>
+                            <td th:text="${rdv.getPatient().getUser().getNom()}+' '+${rdv.getPatient().getUser().getPrenom()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td th:text="${rdv.getPatient().getUser().getAddress()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td th:text="${rdv.getPatient().getUser().getEmail()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Ville</th>
+                            <td th:text="${rdv.getPatient().getVille()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Couverture Sociale</th>
+                            <td th:text="${rdv.getPatient().getCouvertureSociale()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Profession</th>
+                            <td th:text="${rdv.getPatient().getProfession()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Date Naissance</th>
+                            <td th:text="${rdv.getPatient().getUser().getDateNaissance()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Motif</th>
+                            <td th:text="${rdv.getPatient().getMotif()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <form th:object="${compteRendu}" method="post" th:action="${'/medcin/'+rdv.getId()+'/createcr'}">
                         <div class="form-group">
                             <label>Compte Rendu</label>
-                            <textarea type="text" class="form-control"></textarea>
+                            <textarea th:field="${compteRendu.description}" type="text" class="form-control w-100 h-75"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
