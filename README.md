@@ -1,3 +1,3 @@
-# PFA_EMSI_BackEnd
+# PFA_EMSI_Spring Boot
 
-PFA_EMSI_BackEnd
+Application Web de Gestion de Cabinet Medical
